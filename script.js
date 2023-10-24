@@ -1,4 +1,4 @@
-const data = [];
+const data = JSON.parse(localStorage.getItem("data")) || [];
 
 const nameInput = document.querySelector(".name");
 const lastNameInput = document.querySelector(".lastname");
@@ -14,6 +14,7 @@ submitButton.addEventListener("click", () => {
   if (name && lastname && mail) {
     const users = { name, lastname, mail };
     data.push(users);
+    updateLocalStorage();
     renderUserList();
     nameInput.value = "";
     lastNameInput.value = "";
@@ -38,13 +39,23 @@ userList.addEventListener("click", (e) => {
     const newName = prompt("Edit First Name", data[dataIndex].name);
     const newLastName = prompt("Edit Last Name", data[dataIndex].lastname);
     const newMail = prompt("Edit Mail", data[dataIndex].mail);
-    data[dataIndex].name = newName;
-    data[dataIndex].lastname = newLastName;
-    data[dataIndex].mail = newMail;
+    if (newName !== null && newLastName !== null && newMail !== null) {
+      data[dataIndex].name = newName;
+      data[dataIndex].lastname = newLastName;
+      data[dataIndex].mail = newMail;
+    }
+    updateLocalStorage();
     renderUserList();
   } else if (e.target.classList.contains("delete-button")) {
     const dataIndex = e.target.getAttribute("data-index");
     data.splice(dataIndex, 1);
+    updateLocalStorage();
     renderUserList();
   }
 });
+
+function updateLocalStorage() {
+  localStorage.setItem("data", JSON.stringify(data));
+}
+
+renderUserList();
