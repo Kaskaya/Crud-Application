@@ -5,6 +5,7 @@ const lastNameInput = document.querySelector(".lastname");
 const mailInput = document.querySelector(".mail");
 const submitButton = document.querySelector(".submit-button");
 const userList = document.querySelector(".user-list");
+const search = document.querySelector("#search");
 
 submitButton.addEventListener("click", () => {
   const name = nameInput.value;
@@ -26,9 +27,10 @@ function renderUserList() {
   userList.innerHTML = "";
   data.forEach((user, index) => {
     const li = document.createElement("li");
+    li.classList.add("list-item");
     li.innerHTML = `${user.name} ${user.lastname} ${user.mail}
-    <button class="delete-button" data-index="${index}" >Delete</button>
-    <button class="edit-button" data-index="${index}" >Edit</button> `;
+    <button class="edit-button" data-index="${index}" >Edit</button>
+    <button class="delete-button" data-index="${index}" >Delete</button> `;
     userList.appendChild(li);
   });
 }
@@ -43,6 +45,7 @@ userList.addEventListener("click", (e) => {
       data[dataIndex].name = newName;
       data[dataIndex].lastname = newLastName;
       data[dataIndex].mail = newMail;
+      search.value = "";
     }
     updateLocalStorage();
     renderUserList();
@@ -51,11 +54,25 @@ userList.addEventListener("click", (e) => {
     data.splice(dataIndex, 1);
     updateLocalStorage();
     renderUserList();
+    search.value = "";
   }
 });
 
 function updateLocalStorage() {
   localStorage.setItem("data", JSON.stringify(data));
 }
+
+search.addEventListener("input", () => {
+  const value = search.value.toLowerCase();
+  const listItems = document.querySelectorAll(".list-item");
+  listItems.forEach((item) => {
+    let text = item.textContent;
+    if (text.toLowerCase().includes(value)) {
+      item.style.display = "";
+    } else {
+      item.style.display = "none";
+    }
+  });
+});
 
 renderUserList();
