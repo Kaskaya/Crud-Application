@@ -28,7 +28,7 @@ function renderUserList() {
   data.forEach((user, index) => {
     const li = document.createElement("li");
     li.classList.add("list-item");
-    li.innerHTML = `${user.name} ${user.lastname} ${user.mail}
+    li.innerHTML = `<h2>${user.name} ${user.lastname} ${user.mail}</h2>
     <button class="edit-button" data-index="${index}" >Edit</button>
     <button class="delete-button" data-index="${index}" >Delete</button> `;
     userList.appendChild(li);
