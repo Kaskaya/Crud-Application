@@ -41,6 +41,8 @@ button {
 
 .submit-button {
   background-color: #009620;
+  display: block;
+  margin-top: 10px;
 }
 
 .delete-button {
@@ -78,5 +80,8 @@ li {
 @media (max-width: 650px) {
   h2 {
     font-size: 13px;
+  }
+  button {
+    font-size: 16px;
   }
 }
