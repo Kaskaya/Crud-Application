@@ -10,11 +10,21 @@ body {
 }
 
 main {
+  height: 80vh;
   max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .top {
   margin: 40px 0px;
+}
+
+.middle {
+  display: grid;
 }
 
 .bottom {
@@ -41,7 +51,6 @@ button {
 
 .submit-button {
   background-color: #009620;
-  display: block;
   margin-top: 10px;
 }
 
