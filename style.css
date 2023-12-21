@@ -16,7 +16,6 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
 }
 
 .top {
@@ -68,6 +67,7 @@ h2 {
   font-size: 20px;
   text-overflow: ellipsis;
   overflow: hidden;
+  color: rgb(56, 56, 56);
 }
 
 li {
@@ -84,6 +84,11 @@ li {
 
 .user-list {
   margin: 10px 10px 10px -30px;
+}
+
+.usernames {
+  color: #0006ae;
+  font-weight: light;
 }
 
 @media (max-width: 650px) {

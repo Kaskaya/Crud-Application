@@ -11,8 +11,9 @@ submitButton.addEventListener("click", () => {
   const name = nameInput.value;
   const lastname = lastNameInput.value;
   const mail = mailInput.value;
+  const pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
-  if (name && lastname && mail) {
+  if (name && lastname && mail.match(pattern)) {
     const users = { name, lastname, mail };
     data.push(users);
     updateLocalStorage();
@@ -20,6 +21,8 @@ submitButton.addEventListener("click", () => {
     nameInput.value = "";
     lastNameInput.value = "";
     mailInput.value = "";
+  } else {
+    alert("Please fill the required spaces");
   }
 });
 
@@ -28,7 +31,7 @@ function renderUserList() {
   data.forEach((user, index) => {
     const li = document.createElement("li");
     li.classList.add("list-item");
-    li.innerHTML = `<h2>${user.name} ${user.lastname} ${user.mail}</h2>
+    li.innerHTML = `<h2><span class="usernames">${user.name} ${user.lastname}</span> ${user.mail}</h2>
     <button class="edit-button" data-index="${index}" >Edit</button>
     <button class="delete-button" data-index="${index}" >Delete</button> `;
     userList.appendChild(li);
